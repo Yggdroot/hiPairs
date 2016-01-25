@@ -17,8 +17,8 @@ Usage
 -----
 
  - `:HiPairsDisable` - Disable the plugin.
- - `:HiPairsEnable` &nbsp;&nbsp;&nbsp;- Enable the plugin.
- - `:HiPairsToggle` &nbsp;&nbsp;&nbsp;- Toggle the plugin.
+ - `:HiPairsEnable` &nbsp;&nbsp;- Enable the plugin.
+ - `:HiPairsToggle` &nbsp;&nbsp;- Toggle the plugin.
 
 Customization
 -------------
