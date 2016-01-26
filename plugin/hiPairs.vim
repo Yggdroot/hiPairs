@@ -48,7 +48,6 @@ endif
 
 augroup hiPairs
     autocmd! VimEnter,ColorScheme * call s:DisableMatchParen() | call s:InitColor()
-    autocmd! BufWinEnter * call s:InitMatchPairs()
     autocmd! CursorMoved,CursorMovedI,WinEnter * call s:HiPairs(0)
     autocmd! CursorHold,CursorHoldI * call s:HiPairs(1)
 augroup END
@@ -109,7 +108,7 @@ function! s:ClearMatch()
 endfunction
 
 function! s:IsBufferChanged()
-    if !exists('b:hiPairs_changedtick')
+    if !exists("b:hiPairs_changedtick")
         let b:hiPairs_changedtick = -1
     endif
     if b:hiPairs_changedtick != b:changedtick
@@ -120,6 +119,10 @@ function! s:IsBufferChanged()
 endfunction
 
 function! s:HiPairs(is_hold)
+    if !exists("b:pair_list")
+        call s:InitMatchPairs()
+    endif
+
     if empty(b:pair_list)
         return
     endif
