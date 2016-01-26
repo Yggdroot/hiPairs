@@ -6,7 +6,13 @@ This plugin is inspired by [matchParen.vim]
 
 Screenshots
 -----------
+    let g:hiPairs_enable_matchParen = 0
 
+<img src="https://github.com/Yggdroot/hiPairs/blob/master/hiPairs_demo/demo1.gif" width="360" height="336" alt="demo1" />
+
+    Default:
+
+<img src="https://github.com/Yggdroot/hiPairs/blob/master/hiPairs_demo/demo2.gif" width="360" height="336" alt="demo2" />
 
 Installation
 ------------
