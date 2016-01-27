@@ -22,9 +22,9 @@ endif
 
 if !exists("g:hiPairs_hl_unmatchPair")
     let g:hiPairs_hl_unmatchPair = { 'term'    : 'underline,italic',
-                \                    'cterm'   : 'italic',
-                \                    'ctermfg' : '15',
-                \                    'ctermbg' : '12',
+                \                    'cterm'   : 'NONE',
+                \                    'ctermfg' : '231',
+                \                    'ctermbg' : '196',
                 \                    'gui'     : 'italic',
                 \                    'guifg'   : 'White',
                 \                    'guibg'   : 'Red' }
