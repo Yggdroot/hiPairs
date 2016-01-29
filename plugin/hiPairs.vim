@@ -99,9 +99,12 @@ endfunction
 
 function! s:ClearMatch()
     if exists("w:hiPairs_ids")
-        for id in w:hiPairs_ids
-            call matchdelete(id)
-        endfor
+        try
+            for id in w:hiPairs_ids
+                call matchdelete(id)
+            endfor
+        catch /^Vim\%((\a\+)\)\=:E803/
+        endtry
     endif
     " Store the IDs returned by matchadd
     let w:hiPairs_ids = []
