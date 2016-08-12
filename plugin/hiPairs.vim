@@ -46,6 +46,8 @@ if !exists("g:hiPairs_stopline_more")
     let g:hiPairs_stopline_more = 20000
 endif
 
+let g:hiPairs_exists_matchaddpos = exists("*matchaddpos")
+
 augroup hiPairs
     autocmd! VimEnter,ColorScheme * call s:DisableMatchParen() | call s:InitColor()
     autocmd! CursorMoved,CursorMovedI,WinEnter * call s:HiPairs(0)
@@ -242,20 +244,32 @@ function! s:HiPairs(is_hold)
             return
         else
             "highlight the left unmatched pair
-            let id = matchadd("hiPairs_unmatchPair", '\%' . l_line . 'l\%' . l_col . 'c')
+            if g:hiPairs_exists_matchaddpos
+                let id = matchaddpos("hiPairs_unmatchPair", [[l_line, l_col]])
+            else
+                let id = matchadd("hiPairs_unmatchPair", '\%' . l_line . 'l\%' . l_col . 'c')
+            endif
             call add(w:hiPairs_ids, id)
         endif
     else
         if [l_line, l_col] == [0, 0]
             "highlight the right unmatched pair
-            let id = matchadd("hiPairs_unmatchPair", '\%' . r_line . 'l\%' . r_col . 'c')
+            if g:hiPairs_exists_matchaddpos
+                let id = matchaddpos("hiPairs_unmatchPair", [[r_line, r_col]])
+            else
+                let id = matchadd("hiPairs_unmatchPair", '\%' . r_line . 'l\%' . r_col . 'c')
+            endif
             call add(w:hiPairs_ids, id)
         else
             if l_line < stopline_top && r_line > stopline_bottom
                 return
             else
                 "highlight the matching pairs
-                let id = matchadd("hiPairs_matchPair", '\(\%' . l_line . 'l\%' . l_col . 'c\)\|\(\%' . r_line . 'l\%' . r_col . 'c\)')
+                if g:hiPairs_exists_matchaddpos
+                    let id = matchaddpos("hiPairs_matchPair", [[l_line, l_col], [r_line, r_col]])
+                else
+                    let id = matchadd("hiPairs_matchPair", '\(\%' . l_line . 'l\%' . l_col . 'c\)\|\(\%' . r_line . 'l\%' . r_col . 'c\)')
+                endif
                 call add(w:hiPairs_ids, id)
             endif
         endif
