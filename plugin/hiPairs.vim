@@ -12,12 +12,12 @@ let g:loaded_hiPairs = 1
 
 if !exists("g:hiPairs_hl_matchPair")
     let g:hiPairs_hl_matchPair = { 'term'    : 'underline,bold',
-                \                  'cterm'   : 'underline,bold',
-                \                  'ctermfg' : 'NONE',
-                \                  'ctermbg' : 'NONE',
-                \                  'gui'     : 'underline,bold',
-                \                  'guifg'   : 'NONE',
-                \                  'guibg'   : 'NONE' }
+                \                  'cterm'   : 'bold',
+                \                  'ctermfg' : '0',
+                \                  'ctermbg' : '180',
+                \                  'gui'     : 'bold',
+                \                  'guifg'   : 'Black',
+                \                  'guibg'   : '#D3B17D' }
 endif
 
 if !exists("g:hiPairs_hl_unmatchPair")
@@ -48,9 +48,13 @@ endif
 
 let g:hiPairs_exists_matchaddpos = exists("*matchaddpos")
 
+let s:timestamp = reltime()
+let s:updatetime = &updatetime
+
 augroup hiPairs
     autocmd! VimEnter,ColorScheme * call s:DisableMatchParen() | call s:InitColor()
-    autocmd! CursorMoved,CursorMovedI,WinEnter * call s:HiPairs(0)
+    autocmd! CursorMoved,WinEnter * call s:HiPairs(0)
+    autocmd! CursorMovedI * call s:HiPairs(2)
     autocmd! CursorHold,CursorHoldI * call s:HiPairs(1)
 augroup END
 
@@ -123,7 +127,11 @@ function! s:IsBufferChanged()
         return 0
 endfunction
 
-function! s:HiPairs(is_hold)
+function! s:HiPairs(flag)
+    if a:flag == 1
+        let &updatetime = s:updatetime
+    endif
+
     if !exists("b:pair_list")
         call s:InitMatchPairs()
     endif
@@ -137,6 +145,17 @@ function! s:HiPairs(is_hold)
     if pumvisible() || (&t_Co < 8 && !has("gui_running"))
         return
     endif
+
+    let cur_time = reltime()
+    if a:flag != 2 && reltimefloat(reltime(s:timestamp, cur_time)) < 0.1
+        let s:timestamp = cur_time
+        if a:flag == 0
+            let &updatetime = 150
+        endif
+        return
+    endif
+
+    let s:timestamp = cur_time
 
     " Build an expression that detects whether the current cursor position is in
     " certain syntax types (string, comment, etc.), for use as searchpairpos()'s
@@ -169,7 +188,7 @@ function! s:HiPairs(is_hold)
         let timeout = g:hiPairs_timeout
     endif
 
-    if a:is_hold
+    if a:flag == 1
         let timeout = 500
         let b:hiPairs_old_pos = [[0, 0], [0, 0]]
     endif

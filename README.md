@@ -60,13 +60,12 @@ You can use the following global variables to customize the plugin:
  </br>Default value is as below:
 
         let g:hiPairs_hl_matchPair = { 'term'    : 'underline,bold',
-                    \                  'cterm'   : 'underline,bold',
-                    \                  'ctermfg' : 'NONE',
-                    \                  'ctermbg' : 'NONE',
-                    \                  'gui'     : 'underline,bold',
-                    \                  'guifg'   : 'NONE',
-                    \                  'guibg'   : 'NONE' }
-
+                    \                  'cterm'   : 'bold',
+                    \                  'ctermfg' : '0',
+                    \                  'ctermbg' : '180',
+                    \                  'gui'     : 'bold',
+                    \                  'guifg'   : 'Black',
+                    \                  'guibg'   : '#D3B17D' }
 
  - `g:hiPairs_hl_unmatchPair`
 
