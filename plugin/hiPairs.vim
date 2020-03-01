@@ -109,7 +109,7 @@ function! s:ClearMatch()
             for id in w:hiPairs_ids
                 call matchdelete(id)
             endfor
-        catch /^Vim\%((\a\+)\)\=:E803/
+        catch
         endtry
     endif
     " Store the IDs returned by matchadd
