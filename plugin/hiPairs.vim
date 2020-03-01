@@ -147,7 +147,13 @@ function! s:HiPairs(flag)
     endif
 
     let cur_time = reltime()
-    if a:flag != 2 && reltimefloat(reltime(s:timestamp, cur_time)) < 0.1
+    if a:flag == 2
+        let threshold = 0.1
+    else
+        let threshold = 0.1
+    endif
+
+    if reltimefloat(reltime(s:timestamp, cur_time)) < threshold
         let s:timestamp = cur_time
         if a:flag == 0
             let &updatetime = 150
