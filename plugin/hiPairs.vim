@@ -132,20 +132,6 @@ function! s:HiPairs(flag)
         let &updatetime = s:updatetime
     endif
 
-    if !exists("b:pair_list")
-        call s:InitMatchPairs()
-    endif
-
-    if empty(b:pair_list)
-        return
-    endif
-
-    " Avoid that we remove the popup menu.
-    " Return when there are no colors (looks like the cursor jumps).
-    if pumvisible() || (&t_Co < 8 && !has("gui_running"))
-        return
-    endif
-
     let cur_time = reltime()
     if a:flag == 2
         let threshold = 0.1
@@ -162,6 +148,20 @@ function! s:HiPairs(flag)
     endif
 
     let s:timestamp = cur_time
+
+    if !exists("b:pair_list")
+        call s:InitMatchPairs()
+    endif
+
+    if empty(b:pair_list)
+        return
+    endif
+
+    " Avoid that we remove the popup menu.
+    " Return when there are no colors (looks like the cursor jumps).
+    if pumvisible() || (&t_Co < 8 && !has("gui_running"))
+        return
+    endif
 
     " Build an expression that detects whether the current cursor position is in
     " certain syntax types (string, comment, etc.), for use as searchpairpos()'s
