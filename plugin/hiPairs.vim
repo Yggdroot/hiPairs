@@ -270,9 +270,9 @@ function! s:HiPairs(flag)
         else
             "highlight the left unmatched pair
             if g:hiPairs_exists_matchaddpos
-                let id = matchaddpos("hiPairs_unmatchPair", [[l_line, l_col]])
+                silent! let id = matchaddpos("hiPairs_unmatchPair", [[l_line, l_col]])
             else
-                let id = matchadd("hiPairs_unmatchPair", '\%' . l_line . 'l\%' . l_col . 'c')
+                silent! let id = matchadd("hiPairs_unmatchPair", '\%' . l_line . 'l\%' . l_col . 'c')
             endif
             call add(w:hiPairs_ids, id)
         endif
@@ -280,9 +280,9 @@ function! s:HiPairs(flag)
         if [l_line, l_col] == [0, 0]
             "highlight the right unmatched pair
             if g:hiPairs_exists_matchaddpos
-                let id = matchaddpos("hiPairs_unmatchPair", [[r_line, r_col]])
+                silent! let id = matchaddpos("hiPairs_unmatchPair", [[r_line, r_col]])
             else
-                let id = matchadd("hiPairs_unmatchPair", '\%' . r_line . 'l\%' . r_col . 'c')
+                silent! let id = matchadd("hiPairs_unmatchPair", '\%' . r_line . 'l\%' . r_col . 'c')
             endif
             call add(w:hiPairs_ids, id)
         else
@@ -291,9 +291,9 @@ function! s:HiPairs(flag)
             else
                 "highlight the matching pairs
                 if g:hiPairs_exists_matchaddpos
-                    let id = matchaddpos("hiPairs_matchPair", [[l_line, l_col], [r_line, r_col]])
+                    silent! let id = matchaddpos("hiPairs_matchPair", [[l_line, l_col], [r_line, r_col]])
                 else
-                    let id = matchadd("hiPairs_matchPair", '\(\%' . l_line . 'l\%' . l_col . 'c\)\|\(\%' . r_line . 'l\%' . r_col . 'c\)')
+                    silent! let id = matchadd("hiPairs_matchPair", '\(\%' . l_line . 'l\%' . l_col . 'c\)\|\(\%' . r_line . 'l\%' . r_col . 'c\)')
                 endif
                 call add(w:hiPairs_ids, id)
             endif
