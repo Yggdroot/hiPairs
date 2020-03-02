@@ -56,6 +56,7 @@ augroup hiPairs
     autocmd! CursorMoved,WinEnter * call s:HiPairs(0)
     autocmd! CursorMovedI * call s:HiPairs(2)
     autocmd! CursorHold,CursorHoldI * call s:HiPairs(1)
+    autocmd! WinLeave * call s:ClearMatch()
 augroup END
 
 " Skip the rest if it was already done.
