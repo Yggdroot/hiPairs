@@ -150,6 +150,10 @@ function! s:HiPairs(flag)
 
     let s:timestamp = cur_time
 
+    if &ft == 'twoline'
+        return
+    endif
+
     if !exists("b:pair_list")
         call s:InitMatchPairs()
     endif
