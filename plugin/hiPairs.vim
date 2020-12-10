@@ -43,7 +43,7 @@ if !exists("g:hiPairs_insert_timeout")
 endif
 
 if !exists("g:hiPairs_stopline_more")
-    let g:hiPairs_stopline_more = 20000
+    let g:hiPairs_stopline_more = 200
 endif
 
 let g:hiPairs_exists_matchaddpos = exists("*matchaddpos")

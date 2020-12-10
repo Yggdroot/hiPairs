@@ -52,7 +52,7 @@ You can use the following global variables to customize the plugin:
  - `g:hiPairs_stopline_more`
 
  When `hiPairs` searching the pair, this variable tells it to search `g:hiPairs_stopline_more` lines more.
- </br>Default value is 20000.
+ </br>Default value is 200.
 
  - `g:hiPairs_hl_matchPair`
 
